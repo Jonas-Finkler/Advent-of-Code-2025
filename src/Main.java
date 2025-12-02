@@ -1,7 +1,16 @@
+import aoc.dec01.Dec01;
+import aoc.Puzzle;
+import aoc.dec01.Safe;
+
 public class Main {
     public static void main(String[] args) {
-        dec01.Puzzle.solveA();
-        dec01.Puzzle.solveB();
 
+        Puzzle[] puzzles = {
+            new Dec01(),
+        };
+
+        for (Puzzle puzzle : puzzles) {
+            puzzle.solveAndPrint();
+        }
     }
 }

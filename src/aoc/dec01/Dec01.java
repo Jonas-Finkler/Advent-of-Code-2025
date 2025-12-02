@@ -1,52 +1,51 @@
-package dec01;
+package aoc.dec01;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.Iterator;
 import java.util.Scanner;
 import java.io.File;
-public class Puzzle {
+import aoc.Puzzle;
 
-    public static void solveA() {
+public class Dec01 extends Puzzle {
+
+    @Override
+    public String getName(){
+        return "December 01";
+    }
+
+    @Override
+    public int solveA() throws Exception {
         Safe safe = new Safe(50, 100);
 
         int zeroCount = 0;
 
-        try {
             for (Integer steps: parseInput(new File("inputs/01.txt"))) {
                 safe.turn(steps);
                 if (safe.getState() == 0) {
                     zeroCount++;
                 }
             }
-
-            System.out.println("Solution for Dec 01 A: " + zeroCount);
-        } catch (Exception e) {
-            System.out.println("Error: " + e.getMessage());
-        }
+            return zeroCount;
     }
 
-    public static void solveB() {
+    @Override
+    public int solveB() throws Exception {
         Safe safe = new Safe(50, 100);
 
         int zeroCount = 0;
 
-        try {
             for (Integer steps: parseInput(new File("inputs/01.txt"))) {
                 zeroCount += safe.turnAndGetZeroCount(steps);
             }
 
-            System.out.println("Solution for Dec 01 B: " + zeroCount);
-        } catch (Exception e) {
-            System.out.println("Error: " + e.getMessage());
-        }
+            return zeroCount;
     }
 
-    private static Iterable<Integer> parseInput(File file) throws FileNotFoundException {
+    private Iterable<Integer> parseInput(File file) throws FileNotFoundException {
         Scanner scanner = new Scanner(file);
-        return new Iterable<Integer>() {
+        return new Iterable<>() {
             @Override
             public Iterator<Integer> iterator() {
-                return new Iterator<Integer>() {
+                return new Iterator<>() {
 
                     @Override
                     public boolean hasNext() {

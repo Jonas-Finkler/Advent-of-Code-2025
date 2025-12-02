@@ -1,4 +1,4 @@
-package dec01;
+package aoc.dec01;
 
 public class Safe {
 
