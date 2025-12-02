@@ -11,9 +11,6 @@ public class Puzzle {
 
         int zeroCount = 0;
 
-
-
-        // read input file
         try {
             for (Integer steps: parseInput(new File("inputs/01.txt"))) {
                 safe.turn(steps);
@@ -23,6 +20,22 @@ public class Puzzle {
             }
 
             System.out.println("Solution for Dec 01 A: " + zeroCount);
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
+
+    public static void solveB() {
+        Safe safe = new Safe(50, 100);
+
+        int zeroCount = 0;
+
+        try {
+            for (Integer steps: parseInput(new File("inputs/01.txt"))) {
+                zeroCount += safe.turnAndGetZeroCount(steps);
+            }
+
+            System.out.println("Solution for Dec 01 B: " + zeroCount);
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
         }
