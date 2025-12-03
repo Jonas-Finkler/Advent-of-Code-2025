@@ -15,7 +15,7 @@ public class Dec02 extends Puzzle {
 
     @Override
     public String solveA() throws Exception {
-        return solve(false);
+        return solve(false)
     }
 
     @Override

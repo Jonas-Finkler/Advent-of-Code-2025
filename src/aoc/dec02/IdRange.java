@@ -22,7 +22,7 @@ public class IdRange {
         String idStr = id.toString();
         if (idStr.length() % 2 == 1) {
             return true;
-}
+        }
         for (int i = 0; i < idStr.length() / 2; i++) {
             if (idStr.charAt(i) != idStr.charAt(idStr.length() / 2 + i)) {
                 return true;
