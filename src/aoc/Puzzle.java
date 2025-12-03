@@ -2,8 +2,8 @@ package aoc;
 
 public abstract class Puzzle {
     public abstract String getName();
-    public abstract int solveA() throws Exception;
-    public abstract int solveB() throws Exception;
+    public abstract String solveA() throws Exception;
+    public abstract String solveB() throws Exception;
 
     public void solveAndPrint() {
 

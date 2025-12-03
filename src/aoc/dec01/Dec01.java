@@ -13,7 +13,7 @@ public class Dec01 extends Puzzle {
     }
 
     @Override
-    public int solveA() throws Exception {
+    public String solveA() throws Exception {
         Safe safe = new Safe(50, 100);
 
         int zeroCount = 0;
@@ -24,11 +24,11 @@ public class Dec01 extends Puzzle {
                     zeroCount++;
                 }
             }
-            return zeroCount;
+            return Integer.toString(zeroCount);
     }
 
     @Override
-    public int solveB() throws Exception {
+    public String solveB() throws Exception {
         Safe safe = new Safe(50, 100);
 
         int zeroCount = 0;
@@ -37,7 +37,7 @@ public class Dec01 extends Puzzle {
                 zeroCount += safe.turnAndGetZeroCount(steps);
             }
 
-            return zeroCount;
+            return Integer.toString(zeroCount);
     }
 
     private Iterable<Integer> parseInput(File file) throws FileNotFoundException {
