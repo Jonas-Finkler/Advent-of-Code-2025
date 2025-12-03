@@ -12,9 +12,9 @@ public class IdRange {
     }
 
     public IdRange(String rangeStr) {
-        String[] parts = rangeStr.split("-");
-        this.beg = new BigInteger(parts[0].trim());
-        this.end = new BigInteger(parts[1].trim());
+        String[] parts = rangeStr.trim().split("-");
+        this.beg = new BigInteger(parts[0]);
+        this.end = new BigInteger(parts[1]);
     }
 
     // Definition of first task, repeats twice
