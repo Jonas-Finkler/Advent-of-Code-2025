@@ -26,7 +26,7 @@ public class Dec01 extends Puzzle {
                     if (safe.getState() == 0) {
                         zeroCount++;
                     }
-                } else {
+                } else { // Part B
                     zeroCount += safe.turnAndGetZeroCount(steps);
                 }
             }
