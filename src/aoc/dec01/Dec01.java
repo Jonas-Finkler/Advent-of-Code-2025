@@ -1,12 +1,13 @@
 package aoc.dec01;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.Iterator;
-import java.util.Scanner;
-import java.io.File;
 import aoc.Puzzle;
 
 public class Dec01 extends Puzzle {
+
+    private int[] steps;
+
+    public Dec01() {
+        steps = parseInput();
+    }
 
     @Override
     public int getDay() {
@@ -20,14 +21,14 @@ public class Dec01 extends Puzzle {
 
         int zeroCount = 0;
 
-            for (Integer steps: parseInput()) {
+            for (Integer step: steps) {
                 if (part == Part.A) {
-                    safe.turn(steps);
+                    safe.turn(step);
                     if (safe.getState() == 0) {
                         zeroCount++;
                     }
                 } else { // Part B
-                    zeroCount += safe.turnAndGetZeroCount(steps);
+                    zeroCount += safe.turnAndGetZeroCount(step);
                 }
             }
             return Integer.toString(zeroCount);

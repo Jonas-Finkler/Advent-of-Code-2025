@@ -6,6 +6,12 @@ import java.math.BigInteger;
 
 public class Dec02 extends Puzzle {
 
+    private IdRange[] ranges;
+
+    public Dec02() {
+        ranges = parseInput();
+    }
+
     @Override
     public int getDay() {
         return 2;
@@ -17,7 +23,6 @@ public class Dec02 extends Puzzle {
     }
 
     private String solve(boolean useExtendedDefinition) {
-        IdRange[] ranges = parseInput();
         BigInteger sum = BigInteger.ZERO;
         for (IdRange range : ranges) {
             sum = sum.add(range.sumOfInvalidIds(useExtendedDefinition));
@@ -28,9 +33,8 @@ public class Dec02 extends Puzzle {
     private IdRange[] parseInput() {
         String input = getInput();
         String[] rangeStrs = input.split(",");
-        IdRange[] ranges = Arrays.stream(rangeStrs)
+        return Arrays.stream(rangeStrs)
                 .map((String s) -> new IdRange(s))
                 .toArray(n -> new IdRange[n]);
-        return ranges;
     }
 }
