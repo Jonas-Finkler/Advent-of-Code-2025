@@ -38,7 +38,7 @@ public class PaperRollPlan {
         return count;
     }
 
-    private boolean isAccessible(int x, int y) {
+    public boolean isAccessible(int x, int y) {
         if (!get(x, y)) {
             return false;
         }

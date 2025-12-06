@@ -3,6 +3,7 @@ import aoc.dec01.Dec01;
 import aoc.dec02.Dec02;
 import aoc.dec03.Dec03;
 import aoc.dec04.Dec04;
+import aoc.dec05.Dec05;
 
 public class Main {
     public static void main(String[] args) {
@@ -11,7 +12,8 @@ public class Main {
                 new Dec01(),
                 new Dec02(),
                 new Dec03(),
-                new Dec04()
+                new Dec04(),
+                new Dec05()
         };
 
         for (Puzzle puzzle : puzzles) {
