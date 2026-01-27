@@ -3,6 +3,7 @@ package aoc.dec06;
 import aoc.Puzzle;
 
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class MathSheet {
@@ -11,20 +12,57 @@ public class MathSheet {
     Column[] columns;
 
     public MathSheet(String sheetText) {
+        this(sheetText, false);
+    }
+
+    public MathSheet(String sheetText, boolean cephStyle) {
         String[] lines = sheetText.split("\n");
-        String[][] rows = Arrays.stream(lines).map(
-                l -> Arrays.stream(l.trim().split(" ")).filter(s -> !s.isEmpty()).toArray(String[]::new)
-        ).toArray(String[][]::new);
-        int nCols = rows[0].length;
+        if (cephStyle) {
+            String operatorLine = lines[lines.length - 1];
+            Operator[] operators = Arrays.stream(operatorLine.trim().split(" "))
+                    .filter(s -> !s.isEmpty())
+                    .map(this::parseOperator)
+                    .toArray(Operator[]::new);
+            int nCols = operators.length;
+            columns = new Column[nCols];
 
-        columns = new Column[nCols];
-        for (int c = 0; c < nCols; c++) {
-            BigInteger[] values = new BigInteger[lines.length - 1];
-            for (int r = 0; r < lines.length - 1; r++) {
-                values[r] = new BigInteger(rows[r][c]);
+            // extract first n-1 lines
+            String[] valueLines = Arrays.copyOfRange(lines, 0, lines.length - 1);
+            ArrayList<BigInteger> valueBuffer = new ArrayList<>();
+
+            int iCol = 0;
+            for (int c = 0; c < valueLines[0].length(); c++) {
+                final int colIndex = c;
+                String col = Arrays.stream(valueLines).map(l -> String.valueOf(l.charAt(colIndex))).reduce("", String::concat).trim();
+                if (!col.isEmpty()) {
+                    valueBuffer.add(new BigInteger(col));
+                } else {
+                    // end of column
+                    BigInteger[] values = valueBuffer.toArray(new BigInteger[0]);
+                    columns[iCol] = new Column(values, operators[iCol]);
+                    iCol++;
+                    valueBuffer.clear();
+                }
             }
+            // last column
+            BigInteger[] values = valueBuffer.toArray(new BigInteger[0]);
+            columns[iCol] = new Column(values, operators[iCol]);
 
-            columns[c] = new Column(values, parseOperator(rows[lines.length - 1][c]));
+        } else {
+            String[][] rows = Arrays.stream(lines).map(
+                    l -> Arrays.stream(l.trim().split(" ")).filter(s -> !s.isEmpty()).toArray(String[]::new)
+            ).toArray(String[][]::new);
+            int nCols = rows[0].length;
+
+            columns = new Column[nCols];
+            for (int c = 0; c < nCols; c++) {
+                BigInteger[] values = new BigInteger[lines.length - 1];
+                for (int r = 0; r < lines.length - 1; r++) {
+                    values[r] = new BigInteger(rows[r][c]);
+                }
+
+                columns[c] = new Column(values, parseOperator(rows[lines.length - 1][c]));
+            }
         }
 
     }
